@@ -16,7 +16,7 @@ To reproduce **STAR**, you can create your environment by env.yaml:
 
 ### 2.1. Data
 
-Data for STAR can be unzipped from data.zip, and the raw data can be downloaded from [here](https://www.pdbbind-plus.org.cn/).
+Data for STAR can be unzipped from data.zip, and the raw data can be downloaded from [here](https://www.pdbbind-plus.org.cn/), processed by graph_constructer.py.
 
 ### 2.2. Weight 
 Weights for STAR can be downloaded from [here](https://pan.baidu.com/s/1-PDKToc8Lf9xXTRgZGeDFQ?pwd=0000).
@@ -26,24 +26,6 @@ For training:
 ```sh
     $ python train_s1.py or train_s2.py
 ```
-For evaluating:
-
-```sh
-    $ python evaluate.py
-```
-
-### 2.4. Baselines
-MIRACLE:[https://github.com/isjakewong/MIRACLE](https://github.com/isjakewong/MIRACLE)
-
-SA-DDI:[https://github.com/guaguabujianle/SA-DDI](https://github.com/guaguabujianle/SA-DDI)
-
-DSN-DDI:[https://doi.org/10.1093/bib/bbac597](https://doi.org/10.1093/bib/bbac597)
-
-PEB-DDI:[https://github.com/wayyzt/PEB-DDI](https://github.com/wayyzt/PEB-DDI)
-
-MetDDI:[https://github.com/LabWeng/MeTDDI/tree/main](https://github.com/LabWeng/MeTDDI/tree/main)
-
-MDI-DDI:[https://github.com/02echo/MDI-DDI](https://github.com/02echo/MDI-DDI)
 # 3. Concat
 Thank you for your interest in our work!
 
