@@ -114,9 +114,11 @@ if __name__ == '__main__':
 
         train_set = GraphDataset(train_dir, train_df, graph_type=graph_type, create=False)
         test_set = GraphDataset(test_dir, test_df, graph_type=graph_type, create=False)
+        val_set = GraphDataset(val_dir, val_df, graph_type=graph_type, create=False)
 
         train_loader = DataLoader(train_set, batch_size=batch_size, shuffle=True, collate_fn=collate_fn, num_workers=8)
         test_loader = DataLoader(test_set, batch_size=batch_size, shuffle=False, collate_fn=collate_fn, num_workers=8)
+        val_loader = DataLoader(val_set, batch_size=batch_size, shuffle=False, collate_fn=collate_fn, num_workers=8)
 
         test2013_dir = os.path.join('/data/CASF-2013-updated/CASF-2013/coreset')
         test2016_dir = os.path.join('/data/CASF-2016/CASF-2016/coreset')
@@ -182,7 +184,7 @@ if __name__ == '__main__':
             running_loss.reset()
 
             # start validating
-            valid_rmse, valid_pr, mae_val, corr_val, cindex_val, sd_val = val(model, test_loader, device)
+            valid_rmse, valid_pr, mae_val, corr_val, cindex_val, sd_val = val(model, val_loader, device)
             msg = "epoch-%d, train_loss-%.4f, train_rmse-%.4f, test_rmse-%.4f, test_pr-%.4f, test_mae-%.4f, test_corr-%.4f, test_cindex-%.4f, test_sd-%.4f" \
                     % (epoch, epoch_loss, epoch_rmse, valid_rmse, valid_pr, mae_val, corr_val, cindex_val, sd_val)
             #logger.info(msg)
@@ -214,17 +216,4 @@ if __name__ == '__main__':
         test2016_rmse, test2016_pr, mae_test2016, corr_test2016, cindex_test2016, sd_test2016 = val(model, test2016_loader, device)
         testhiq_rmse, testhiq_pr, mae_testhiq, corr_testhiq, cindex_testhiq, sd_testhiq = val(model, testhiq_loader, device)
 
-        msg = "test_rmse-%.4f, test_pr-%.4f, test_mae-%.4f, test_corr-%.4f, test_cindex-%.4f, test_sd-%.4f" \
-              % (valid_rmse, valid_pr, mae_val, corr_val, cindex_val, sd_val)
-        msg_2013 = "test2013_rmse-%.4f, test2013_pr-%.4f, test2013_mae-%.4f, test2013_corr-%.4f, test2013_cindex-%.4f, test2013_sd-%.4f" \
-              % (test2013_rmse, test2013_pr, mae_test2013, corr_test2013, cindex_test2013, sd_test2013)
-        msg_2016 = "test2016_rmse-%.4f, test2016_pr-%.4f, test2016_mae-%.4f, test2016_corr-%.4f, test2016_cindex-%.4f, test2016_sd-%.4f" \
-                   % (test2016_rmse, test2016_pr, mae_test2016, corr_test2016, cindex_test2016, sd_test2016)
-        msg_hiq = "testhiq_rmse-%.4f, testhiq_pr-%.4f, testhiq_mae-%.4f, testhiq_corr-%.4f, testhiq_cindex-%.4f, testhiq_sd-%.4f" \
-                   % (testhiq_rmse, testhiq_pr, mae_testhiq, corr_testhiq, cindex_testhiq, sd_testhiq)
-
-        logger.info(msg)
-        logger.info(msg_2013)
-        logger.info(msg_2016)
-        logger.info(msg_hiq)
         # %%
